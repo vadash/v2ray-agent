@@ -1622,12 +1622,15 @@ installV2Ray() {
 	fi
 }
 
-# Install hysteria
+# 安装 hysteria
 installHysteria() {
-	readInstallType
-	echoContent skyBlue "\nProgress $1/${totalProgress} : Install Hysteria"
+    readInstallType
+    echoContent skyBlue "\n进度  $1/${totalProgress} : 安装Hysteria"
+
     if [[ -z "${hysteriaConfigPath}" ]]; then
- 		version=$(curl -s https://api.github.com/repos/apernet/hysteria/releases | jq -r '.[]| select (.prerelease==false)|. tag_name'  | head -1)
+
+        version=$(curl -s https://api.github.com/repos/apernet/hysteria/releases | jq -r '.[]|select (.prerelease==false)|.tag_name' | head -1)
+
         echoContent green " ---> Hysteria版本:${version}"
         if wget --help | grep -q show-progress; then
             wget -c -q --show-progress -P /etc/v2ray-agent/hysteria/ "https://github.com/apernet/hysteria/releases/download/${version}/${hysteriaCoreCPUVendor}"
@@ -1638,7 +1641,7 @@ installHysteria() {
         chmod 655 /etc/v2ray-agent/hysteria/hysteria
     else
         echoContent green " ---> Hysteria版本:$(/etc/v2ray-agent/hysteria/hysteria --version | awk '{print $3}')"
-        read -r -p "Update, upgrade? [y/n]:" reInstallHysteriaStatus
+        read -r -p "是否更新、升级？[y/n]:" reInstallHysteriaStatus
         if [[ "${reInstallHysteriaStatus}" == "y" ]]; then
             rm -f /etc/v2ray-agent/hysteria/hysteria
             installHysteria "$1"
