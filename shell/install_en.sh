@@ -1622,31 +1622,31 @@ installV2Ray() {
 	fi
 }
 
-# install hysteria
+# Install hysteria
 installHysteria() {
-	readInstallType
-	echoContent skyBlue "\nProgress $1/${totalProgress} : Install Hysteria"
+    readInstallType
+ echoContent skyBlue "\nProgress $1/${totalProgress} : Install Hysteria"
 
-	if [[ -z "${hysteriaConfigPath}" ]]; then
+    if [[ -z "${hysteriaConfigPath}" ]]; then
 
-		version=$(curl -s https://api.github.com/repos/apernet/hysteria/hysteria/releases | jq -r '.[]|select (.prerelease==false)|.tag_name' | head -1)
+ version=$(curl -s https://api.github.com/repos/apernet/hysteria/releases | jq -r '.[]| select (.prerelease==false)|. tag_name'  | head -1)
 
-		echoContent green " ---> Hysteria version: ${version}"
-		if wget --help | grep -q show-progress; then
-			wget -c -q --show-progress -P /etc/v2ray-agent/hysteria/ "https://github.com/apernet/hysteria/hysteria/releases/download/${version}/${hysteriaCoreCPUVendor}"
-		else
-			wget -c -P /etc/v2ray-agent/hysteria/ "https://github.com/apernet/hysteria/hysteria/releases/download/${version}/${hysteriaCoreCPUVendor}" >/dev/null 2>&1
-		fi
-		mv "/etc/v2ray-agent/hysteria/${hysteriaCoreCPUVendor}" /etc/v2ray-agent/hysteria/hysteria
-		chmod 655 /etc/v2ray-agent/hysteria/hysteria
-	else
-		echoContent green " ---> Hysteria version:$(/etc/v2ray-agent/hysteria/hysteria --version | awk '{print $3}')"
-		read -r -p "Update, upgrade? [y/n]:" reInstallHysteriaStatus
-		if [[ "${reInstallHysteriaStatus}" == "y" ]]; then
-			rm -f /etc/v2ray-agent/hysteria/hysteria
-			installHysteria "$1"
-		fi
-	fi
+        echoContent green " ---> Hysteria版本:${version}"
+        if wget --help | grep -q show-progress; then
+            wget -c -q --show-progress -P /etc/v2ray-agent/hysteria/ "https://github.com/apernet/hysteria/releases/download/${version}/${hysteriaCoreCPUVendor}"
+        else
+            wget -c -P /etc/v2ray-agent/hysteria/ "https://github.com/apernet/hysteria/releases/download/${version}/${hysteriaCoreCPUVendor}" >/dev/null 2>&1
+        be
+        mv "/etc/v2ray-agent/hysteria/${hysteriaCoreCPUVendor}" /etc/v2ray-agent/hysteria/hysteria
+        chmod 655 /etc/v2ray-agent/hysteria/hysteria
+    else
+        echoContent green " ---> Hysteria版本:$(/etc/v2ray-agent/hysteria/hysteria --version | awk '{print $3}')"
+        read -r -p "Update, upgrade? [y/n]:" reInstallHysteriaStatus
+        if [[ "${reInstallHysteriaStatus}" == "y" ]]; then
+            rm -f /etc/v2ray-agent/hysteria/hysteria
+            installHysteria "$1"
+        be
+    be
 
 }
 # install xray
