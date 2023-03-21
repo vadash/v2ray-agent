@@ -1624,13 +1624,10 @@ installV2Ray() {
 
 # Install hysteria
 installHysteria() {
-    readInstallType
- echoContent skyBlue "\nProgress $1/${totalProgress} : Install Hysteria"
-
+	readInstallType
+	echoContent skyBlue "\nProgress $1/${totalProgress} : Install Hysteria"
     if [[ -z "${hysteriaConfigPath}" ]]; then
-
- version=$(curl -s https://api.github.com/repos/apernet/hysteria/releases | jq -r '.[]| select (.prerelease==false)|. tag_name'  | head -1)
-
+ 		version=$(curl -s https://api.github.com/repos/apernet/hysteria/releases | jq -r '.[]| select (.prerelease==false)|. tag_name'  | head -1)
         echoContent green " ---> Hysteria版本:${version}"
         if wget --help | grep -q show-progress; then
             wget -c -q --show-progress -P /etc/v2ray-agent/hysteria/ "https://github.com/apernet/hysteria/releases/download/${version}/${hysteriaCoreCPUVendor}"
@@ -1647,8 +1644,8 @@ installHysteria() {
             installHysteria "$1"
         be
     be
-
 }
+
 # install xray
 installXray() {
 	readInstallType
