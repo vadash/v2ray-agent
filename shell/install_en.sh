@@ -1633,7 +1633,7 @@ installHysteria() {
             wget -c -q --show-progress -P /etc/v2ray-agent/hysteria/ "https://github.com/apernet/hysteria/releases/download/${version}/${hysteriaCoreCPUVendor}"
         else
             wget -c -P /etc/v2ray-agent/hysteria/ "https://github.com/apernet/hysteria/releases/download/${version}/${hysteriaCoreCPUVendor}" >/dev/null 2>&1
-        be
+        fi
         mv "/etc/v2ray-agent/hysteria/${hysteriaCoreCPUVendor}" /etc/v2ray-agent/hysteria/hysteria
         chmod 655 /etc/v2ray-agent/hysteria/hysteria
     else
@@ -1642,8 +1642,8 @@ installHysteria() {
         if [[ "${reInstallHysteriaStatus}" == "y" ]]; then
             rm -f /etc/v2ray-agent/hysteria/hysteria
             installHysteria "$1"
-        be
-    be
+        fi
+    fi
 }
 
 # install xray
